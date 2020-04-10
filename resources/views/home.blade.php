@@ -99,7 +99,9 @@
               <p>
                 Surat
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
+                @if(!empty($jumlah_surat))
+                    <span class="badge badge-info right">{{ $jumlah_surat }}</span>
+                @endif
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -174,7 +176,7 @@
           </div>
           @endif
 
-          
+
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
@@ -209,6 +211,7 @@
             @yield('penilaian')
             @yield('penilaian_pegawai')
             @yield('edit_nilai')
+            @yield('filter_nomor')
         </div>
       </div><!-- /.container-fluid -->
     </section>

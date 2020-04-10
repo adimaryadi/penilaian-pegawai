@@ -1,5 +1,5 @@
 @extends('home')
-@section('list_surat')
+@section('filter_nomor')
 <div class="card" style="width: 100%">
     <div class="card-header">
       <h3 class="card-title">Surat</h3>
@@ -11,7 +11,7 @@
             @csrf
             <div class="row">
                 <div class="col-md-6">
-                    <input type="date" class="form-control" name="filter_surat" required="required">
+                    <input type="date" class="form-control" name="filter_surat" value="{{ $bulan }}" required="required">
                 </div>
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>

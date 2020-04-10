@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SuratModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class SuratController extends Controller
 {
     /**
@@ -43,6 +44,7 @@ class SuratController extends Controller
         $surat->no_surat        =       $request->no_surat;
         $surat->tanggal         =       $request->tanggal;
         $surat->id_user         =       Auth::user()->id;
+        $surat->bulan           =       date('Y-m',strtotime($request->tanggal));
         $surat->save();
         return redirect('surat')->with('pesan','Surat '.$request->no_surat.' Sudah di simpan');
     }
@@ -97,5 +99,13 @@ class SuratController extends Controller
         $delete          =       SuratModel::find($id);
         $delete->delete();
         return $delete;
+    }
+
+    public function filter_surat(Request $request) {
+
+        $filter                 =       date('Y-m',strtotime($request->filter_surat));
+        $data_surat             =       DB::table('no_surat')->where('bulan', $filter)->get();
+        $bulan                  =       $request->filter_surat;
+        return view('content.surat.filter',compact('data_surat','bulan'));
     }
 }

@@ -21,7 +21,7 @@
                 <label for="exampleInputEmail1">Nama</label>
                 <input type="text" class="form-control" name="nama" id="exampleInputEmail1" placeholder="Nama..." value="{{ $edit->name }}" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
                 <input type="email" class="form-control" name="email" id="exampleInputEmail1" placeholder="Email..." value="{{ $edit->email }}" required>
@@ -63,5 +63,5 @@
           </div>
         </form>
       </div>
-</div>   
+</div>
 @endsection

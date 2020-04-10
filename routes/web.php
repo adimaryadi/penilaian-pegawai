@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('pegawai','PegawaiController');
 Route::resource('penilaian','PenilaianController');
 Route::post('logout','HomeController@logout');
+Route::post('filter','SuratController@filter_surat');

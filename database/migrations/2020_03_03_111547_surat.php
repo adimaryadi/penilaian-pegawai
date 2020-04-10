@@ -17,6 +17,7 @@ class Surat extends Migration
             $table->bigIncrements('id');
             $table->string('no_surat')->nullable();
             $table->date('tanggal')->nullable();
+            $table->string('bulan')->nullable();
             $table->bigInteger('id_user')->nullable();
             $table->timestamps();
         });

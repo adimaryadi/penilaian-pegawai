@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\SuratModel;
 class HomeController extends Controller
 {
     /**
@@ -23,7 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $surat              =        SuratModel::all();
+        $jumlah_surat       =        count($surat);
+        return view('home',compact('jumlah_surat'));
     }
 
     public function logout() {

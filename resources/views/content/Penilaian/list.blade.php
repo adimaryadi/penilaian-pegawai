@@ -31,80 +31,13 @@
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>NIP</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Jabatan</th>
-                    <th>No Surat </th>
-                    <th>Action</th>
-                </tr>
-            </tfoot>
+
           </table>
     </div>
     {{-- test --}}
     <!-- /.card-body -->
   </div>
-  @if(Auth::user()->level == 'admin')
-  <div class="card" style="width: 100%;">
-    <div class="card-header">
-      <h3 class="card-title">Hasil penilaian</h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-        <table id="example1" class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>ID NIP</th>
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Kedisiplinan</th>
-                    <th>Kerja sama </th>
-                    <th>Kode Etik</th>
-                    <th>KPL</th>
-                    <th>Pembuatan KKa</th>
-                    <th>action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($penilaian_pegawai as $item)
-                    <tr>
-                        <td>{{ $item->id_nip }}</td>
-                        <td>{{ $item->nama }}</td>
-                        <td>{{ $item->jabatan }}</td>
-                        <td>{{ $item->kedisiplinan }}</td>
-                        <td>{{ $item->kerja_sama }}</td>
-                        <td>{{ $item->kode_etik }}</td>
-                        <td>{{ $item->ketepatan_membuat_laporan }}</td>
-                        <td>{{ $item->pembuatan_kka }}</td>
-                        <td>
-                            <div>
-                                <a href="{{ url('penilaian/'.$item->id.'/edit') }}"><i class="fas fa-edit"></i></a>
-                                <a href="#delete" onclick="deletePenilaian('{{ $item->id }}')"><i class="fas fa-eraser" style="color: tomato;"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th>ID NIP</th>
-                    <th>Nama</th>
-                    <th>Jabatan</th>
-                    <th>Kedisiplinan</th>
-                    <th>Kerja sama </th>
-                    <th>Kode Etik</th>
-                    <th>KPL</th>
-                    <th>Pembuatan KKa</th>
-                    <th>action</th>
-                </tr>
-            </tfoot>
-          </table>
-    </div>
-    <!-- /.card-body -->
-  </div>
-  @endif
+  
   <script type="text/javascript">
      function deletePenilaian(id) {
          swal({

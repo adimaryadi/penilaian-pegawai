@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ModelPegawai;
 use App\PenilaianModel;
+use App\SuratModel;
+use Illuminate\Support\Facades\DB;
 class PenilaianController extends Controller
 {
     /**
@@ -22,6 +24,25 @@ class PenilaianController extends Controller
         $pegawai             =      ModelPegawai::all();
         $penilaian_pegawai   =      PenilaianModel::all();
         return view('content.Penilaian.list',compact('pegawai','penilaian_pegawai'));
+    }
+
+    public function hasil_penilaian() {
+        $penilaian_pegawai   =      PenilaianModel::all();
+        $pegawai             =      ModelPegawai::all();
+        $data_surat          =      SuratModel::all();
+        return view('content.Penilaian.hasil_penilaian',compact('pegawai','penilaian_pegawai','data_surat'));
+    }
+
+    public function NoSurathasil(Request $request) {
+        $no_surat            =      $request->cari_surat;
+        $cari_data           =      DB::table('users')->where('no_surat',$no_surat)->get();
+        return view('content.Penilaian.view_penilaian',compact('cari_data'));
+    }
+
+    public function ReportNilai(Request $request) {
+        $no_nip                       =      $request->no_nip;
+        $penilaian_pegawai            =      DB::table('penilaian')->where('id_nip',$no_nip)->get();
+        return view('content.Penilaian.report_nilai',compact('penilaian_pegawai'));
     }
 
     /**

@@ -113,6 +113,46 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Daftar Pegawai
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('pegawai') }}" class="nav-link">
+                  <i class="fas fa-list"></i>
+                  <p> Daftar Pegawai</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-check"></i>
+              <p>
+                Daftar Penilaian
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('penilaian') }}" class="nav-link">
+                  <i class="fas fa-list"></i>
+                  <p> Penilaian</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('hasil_penilaian') }}" class="nav-link">
+                  <i class="fas fa-list"></i>
+                  <p> Hasil Penilaian </p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -148,7 +188,7 @@
           @if(Auth::user()->level == 'admin')
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+<!--             <div class="small-box bg-info">
               <div class="inner">
                 <h3></h3>
 
@@ -158,11 +198,11 @@
                 <i class="fas fa-mail-bulk"></i>
               </div>
               <a href="{{ url('surat') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+            </div> -->
           </div>
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+<!--             <div class="small-box bg-info">
               <div class="inner">
                 <h3></h3>
 
@@ -172,14 +212,14 @@
                 <i class="fas fa-user-friends"></i>
               </div>
               <a href="{{ url('pegawai') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+            </div> -->
           </div>
           @endif
 
 
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+<!--             <div class="small-box bg-info">
               <div class="inner">
                 <h3></h3>
 
@@ -189,7 +229,7 @@
                 <i class="fas fa-check"></i>
               </div>
               <a href="{{ url('penilaian') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
+            </div> -->
           </div>
           <div class="col-lg-6">
             @if(session('pesan'))
@@ -212,6 +252,9 @@
             @yield('penilaian_pegawai')
             @yield('edit_nilai')
             @yield('filter_nomor')
+            @yield('hasil_penilaian')
+            @yield('view_penilaian')
+            @yield('report_nilai')
         </div>
       </div><!-- /.container-fluid -->
     </section>

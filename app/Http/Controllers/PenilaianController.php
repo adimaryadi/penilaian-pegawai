@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ModelPegawai;
 use App\PenilaianModel;
 use App\SuratModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class PenilaianController extends Controller
 {
@@ -26,17 +27,64 @@ class PenilaianController extends Controller
         return view('content.Penilaian.list',compact('pegawai','penilaian_pegawai'));
     }
 
+    public function Pilih_surat() {
+        // $data_surat          =      SuratModel::all();
+        $data_surat          =      DB::table('users')->where('no_surat', Auth::user()->no_surat)->get();
+        return view('content.Penilaian.pilih_surat',compact('data_surat'));
+    }
+
+    public function Pilih_penilai_pegawai(Request $request) {
+        $no_surat            =          $request->no_surat;
+        $cari_pegawai        =          DB::table('users')->where('no_surat',$no_surat)->get();
+        $pegawai             =          [];
+        $dump                =          [];
+        foreach ($cari_pegawai as $value) {
+            if (Auth::user()->id == $value->id) {
+                array_push($dump, $value);
+            } else {
+                array_push($pegawai, $value);
+            }
+        }
+        // $pegawai_json       =     json_encode($pegawai);
+        return view('content.Penilaian.pilih_surat_pegawai',compact('pegawai'));
+    }
+
     public function hasil_penilaian() {
         $penilaian_pegawai   =      PenilaianModel::all();
         $pegawai             =      ModelPegawai::all();
         $data_surat          =      SuratModel::all();
-        return view('content.Penilaian.hasil_penilaian',compact('pegawai','penilaian_pegawai','data_surat'));
+        if (Auth::user()->level == 'admin') {
+            return view('content.Penilaian.hasil_keseluruhan',compact('pegawai','penilaian_pegawai','data_surat'));
+        } else {
+            return view('content.Penilaian.hasil_penilaian',compact('pegawai','penilaian_pegawai','data_surat'));
+        }
+    }
+
+    public function hasil_nilai(Request $request) {
+        $no_surat           =           $request->cari_surat;
+        $cari_data          =           DB::table('penilaian')->where('id_nip',$no_surat)->get();
+        return view('content.Penilaian.report_nilai_admin',compact('cari_data'));
     }
 
     public function NoSurathasil(Request $request) {
         $no_surat            =      $request->cari_surat;
-        $cari_data           =      DB::table('users')->where('no_surat',$no_surat)->get();
-        return view('content.Penilaian.view_penilaian',compact('cari_data'));
+        if (Auth::user()->level == 'admin') {
+            $pegawai           =      DB::table('users')->where('no_surat',$no_surat)->get();
+        } else {
+            $cari_pegawai        =          DB::table('users')->where('no_surat',$no_surat)->get();
+            $pegawai           =          [];
+            $dump                =          [];
+            foreach ($cari_pegawai as $value) {
+                if (Auth::user()->id == $value->id) {
+                    array_push($dump, $value);
+                } else {
+                    array_push($pegawai, $value);
+                }
+            }
+        }
+        // return $cari_data;
+        $pegawai_json       =     json_encode($pegawai);
+        return view('content.Penilaian.nilai',compact('pegawai','pegawai_json'));
     }
 
     public function ReportNilai(Request $request) {
@@ -67,17 +115,26 @@ class PenilaianController extends Controller
 
     public function store(Request $request)
     {
-        $PenilaianPegawai                               =      new PenilaianModel();
-        $PenilaianPegawai->id_nip                       =      $request->id_pegawai;
-        $PenilaianPegawai->nama                         =      $request->nama;
-        $PenilaianPegawai->jabatan                      =      $request->jabatan;
-        $PenilaianPegawai->kedisiplinan                 =      $request->kedisiplinan;
-        $PenilaianPegawai->kerja_sama                   =      $request->kerja_sama;
-        $PenilaianPegawai->kode_etik                    =      $request->kode_etik;
-        $PenilaianPegawai->ketepatan_membuat_laporan    =      $request->ketepatan_waktu_laporan;
-        $PenilaianPegawai->pembuatan_kka                =      $request->pembuatan_kka;
-        $PenilaianPegawai->save();
-        return redirect('penilaian')->with('pesan','Penilaian tersimpan');
+        if (DB::table('penilaian')->where('id_nip',$request->id_pegawai)->exists()) {
+            return redirect('pilih_surat')->with('pesan',$request->id_pegawai.' Sudah ada');
+        } else {
+
+            $PenilaianPegawai                               =      new PenilaianModel();
+            $PenilaianPegawai->id_nip                       =      $request->id_pegawai;
+            $PenilaianPegawai->nama                         =      $request->nama;
+            $PenilaianPegawai->jabatan                      =      $request->jabatan;
+            $PenilaianPegawai->kedisiplinan                 =      $request->kedisiplinan;
+            $PenilaianPegawai->kerja_sama                   =      $request->kerja_sama;
+            $PenilaianPegawai->kode_etik                    =      $request->kode_etik;
+            $PenilaianPegawai->ketepatan_membuat_laporan    =      $request->ketepatan_waktu_laporan;
+            $PenilaianPegawai->pembuatan_kka                =      $request->pembuatan_kka;
+            $PenilaianPegawai->save();
+            if (Auth::user()->level == 'admin') {
+                return redirect('penilaian')->with('pesan','Penilaian tersimpan');
+            } else {
+                return redirect('pilih_surat')->with('pesan','Penilaian tersimpan');
+            }
+        }
 
     }
 

@@ -25,3 +25,6 @@ Route::post('filter','SuratController@filter_surat');
 Route::get('hasil_penilaian','PenilaianController@hasil_penilaian');
 Route::get('cari_surat_nilai','PenilaianController@NoSurathasil');
 Route::get('car_nip','PenilaianController@ReportNilai');
+Route::get('pilih_surat','PenilaianController@Pilih_surat');
+Route::post('pilih_penilai_pegawai','PenilaianController@Pilih_penilai_pegawai');
+Route::get('hasil_nilai','PenilaianController@hasil_nilai');

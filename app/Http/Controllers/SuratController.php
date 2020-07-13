@@ -40,11 +40,12 @@ class SuratController extends Controller
      */
     public function store(Request $request)
     {
-        $surat                  =       new SuratModel();
-        $surat->no_surat        =       $request->no_surat;
-        $surat->tanggal         =       $request->tanggal;
-        $surat->id_user         =       Auth::user()->id;
-        $surat->bulan           =       date('Y-m',strtotime($request->tanggal));
+        $surat                      =       new SuratModel();
+        $surat->no_surat            =       $request->no_surat;
+        $surat->tanggal             =       $request->tanggal;
+        $surat->tanggal_berakhir    =       $request->tanggal_berakhir;
+        $surat->id_user             =       Auth::user()->id;
+        $surat->bulan               =       date('Y-m',strtotime($request->tanggal));
         $surat->save();
         return redirect('surat')->with('pesan','Surat '.$request->no_surat.' Sudah di simpan');
     }
@@ -81,9 +82,10 @@ class SuratController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $updated            =       SuratModel::find($id);
-        $updated->no_surat  =       $request->no_surat;
-        $updated->tanggal   =       $request->tanggal;
+        $updated                    =       SuratModel::find($id);
+        $updated->no_surat          =       $request->no_surat;
+        $updated->tanggal           =       $request->tanggal;
+        $updated->tanggal_berakhir  =       $request->tanggal_berakhir;
         $updated->update();
         return redirect('surat')->with('pesan','Diperbaharui '.$request->no_surat);
     }

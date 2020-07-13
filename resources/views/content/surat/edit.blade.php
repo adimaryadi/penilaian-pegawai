@@ -19,6 +19,10 @@
               <label for="exampleInputPassword1">Tanggal</label>
               <input type="date" class="form-control" name="tanggal" value="{{ $edit->tanggal }}" id="exampleInputPassword1" required>
             </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Tanggal Berakhir</label>
+              <input type="date" class="form-control" name="tanggal_berakhir" value="{{ $edit->tanggal_berakhir }}" id="exampleInputPassword1" required>
+            </div>
           </div>
           <!-- /.card-body -->
 

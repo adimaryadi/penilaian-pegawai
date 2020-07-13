@@ -93,6 +93,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          @if(Auth::user()->level == 'admin')
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -130,6 +131,7 @@
               </li>
             </ul>
           </li>
+          @endif
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-check"></i>
@@ -139,18 +141,22 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @if(Auth::user()->level == 'pegawai')
               <li class="nav-item">
-                <a href="{{ url('penilaian') }}" class="nav-link">
+                <a href="{{ url('pilih_surat') }}" class="nav-link">
                   <i class="fas fa-list"></i>
                   <p> Penilaian</p>
                 </a>
               </li>
+              @endif
+              @if(Auth::user()->level == 'admin')
               <li class="nav-item">
                 <a href="{{ url('hasil_penilaian') }}" class="nav-link">
                   <i class="fas fa-list"></i>
                   <p> Hasil Penilaian </p>
                 </a>
               </li>
+              @endif
             </ul>
           </li>
         </ul>
@@ -255,6 +261,10 @@
             @yield('hasil_penilaian')
             @yield('view_penilaian')
             @yield('report_nilai')
+            @yield('pilih_surat')
+            @yield('pilih_surat_pegawai')
+            @yield('hasil_keseluruhan')
+            @yield('report_nilai_admin')
         </div>
       </div><!-- /.container-fluid -->
     </section>

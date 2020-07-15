@@ -28,6 +28,8 @@
                 <th>Surat</th>
                 <th>tanggal</th>
                 <th>Tanggal Berakhir</th>
+                <th>tujuan kota</th>
+                <th>Tujuan luar kota</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -37,6 +39,8 @@
                     <td>{{ $item->no_surat }}</td>
                     <td>{{ $item->tanggal }}</td>
                     <td>{{ $item->tanggal_berakhir }}</td>
+                    <td>{{ $item->tujuan_kota }}</td>
+                    <td>{{ $item->tujuan_luar_kota }}</td>
                     <td>
                         <a href="{{ url('surat/'.$item->id.'/edit') }}"><i class="fas fa-edit"></i></a>
                         <a href="#" onclick="deleteSurat('{{ $item->id }}')"><i class="fas fa-eraser" style="color: tomato;"></i></a>

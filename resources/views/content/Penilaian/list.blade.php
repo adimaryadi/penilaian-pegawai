@@ -34,7 +34,7 @@
 
           </table>
     </div>
-    {{-- test --}}
+
     <!-- /.card-body -->
   </div>
   

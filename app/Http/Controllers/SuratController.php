@@ -45,6 +45,8 @@ class SuratController extends Controller
         $surat->tanggal             =       $request->tanggal;
         $surat->tanggal_berakhir    =       $request->tanggal_berakhir;
         $surat->id_user             =       Auth::user()->id;
+        $surat->tujuan_kota         =       $request->tujuan_kota;
+        $surat->tujuan_luar_kota    =       $request->tujuan_luar_kota;
         $surat->bulan               =       date('Y-m',strtotime($request->tanggal));
         $surat->save();
         return redirect('surat')->with('pesan','Surat '.$request->no_surat.' Sudah di simpan');
@@ -86,6 +88,8 @@ class SuratController extends Controller
         $updated->no_surat          =       $request->no_surat;
         $updated->tanggal           =       $request->tanggal;
         $updated->tanggal_berakhir  =       $request->tanggal_berakhir;
+        $updated->tujuan_kota         =       $request->tujuan_kota;
+        $updated->tujuan_luar_kota    =       $request->tujuan_luar_kota;
         $updated->update();
         return redirect('surat')->with('pesan','Diperbaharui '.$request->no_surat);
     }

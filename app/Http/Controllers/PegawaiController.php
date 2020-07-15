@@ -48,7 +48,7 @@ class PegawaiController extends Controller
         $pegawai->email         =       $request->email;
         $pegawai->jabatan       =       $request->jabatan;
         $pegawai->password      =       Hash::make($request->password);
-        $pegawai->no_surat      =       $request->no_surat;
+        // $pegawai->no_surat      =       $request->no_surat;
         $pegawai->level         =       $request->level;
         $pegawai->save();
         return redirect('pegawai')->with('pesan','Pegawai Tersimpan');
@@ -95,7 +95,7 @@ class PegawaiController extends Controller
         if (!empty($request->passsword)) {
             $updated->password      =      Hash::make($request->password);
         }
-        $updated->no_surat  =    $request->no_surat;
+        // $updated->no_surat  =    $request->no_surat;
         $updated->level     =    $request->level;
         $updated->update();
         return redirect('pegawai')->with('pesan',$request->nama. ' Diperbaharui');

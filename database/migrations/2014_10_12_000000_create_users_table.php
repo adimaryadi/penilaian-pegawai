@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('jabatan', 90)->nullable();
             $table->string('password');
-            $table->string('no_surat')->nullable();
+            // $table->string('no_surat')->nullable();
             $table->enum('level',['admin','pegawai']);
             $table->rememberToken();
             $table->timestamps();

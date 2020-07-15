@@ -37,16 +37,6 @@
             </div>
 
             <div class="form-group">
-                <label for="">No Surat</label>
-                <select name="no_surat" id="" class="form-control">
-                    <option value="" selected>Pilih No Surat</option>
-                    @foreach ($surat as $item)
-                        <option value="{{ $item->no_surat }}">{{ $item->no_surat }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="form-group">
                 <label for="">Level</label>
                 <select name="level" id="" class="form-control">
                     <option value="admin">Admin</option>

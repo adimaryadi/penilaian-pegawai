@@ -28,3 +28,4 @@ Route::get('car_nip','PenilaianController@ReportNilai');
 Route::get('pilih_surat','PenilaianController@Pilih_surat');
 Route::post('pilih_penilai_pegawai','PenilaianController@Pilih_penilai_pegawai');
 Route::get('hasil_nilai','PenilaianController@hasil_nilai');
+Route::resource('pilih_surat_pegawai','PegawaiPilihSuratControlller');

@@ -129,6 +129,12 @@
                   <p> Daftar Pegawai</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ url('pilih_surat_pegawai') }}" class="nav-link">
+                  <i class="fas fa-list"></i>
+                  <p> Daftar Surat Pegawai</p>
+                </a>
+              </li>
             </ul>
           </li>
           @endif
@@ -265,6 +271,9 @@
             @yield('pilih_surat_pegawai')
             @yield('hasil_keseluruhan')
             @yield('report_nilai_admin')
+            @yield('pilih_pegawai_surat')
+            @yield('buat_surat_pegawai')
+            @yield('edit_surat_pegawai')
         </div>
       </div><!-- /.container-fluid -->
     </section>

@@ -15,7 +15,6 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Jabatan</th>
-                            <th>No Surat </th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -26,7 +25,6 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->email }}</td>
                                 <td>{{ $item->jabatan }}</td>
-                                <td>{{ $item->no_surat }}</td>
                                 <td>
                                     <a href="{{ url('pegawai/'.$item->id.'/edit') }}"><i class="far fa-edit"></i></a>
                                     <a href="#" onclick="DeletePegawai('{{ $item->id }}')"><i class="fa fa-eraser" style="color: tomato;"></i></a>
@@ -40,7 +38,6 @@
                             <th>Nama</th>
                             <th>Email</th>
                             <th>Jabatan</th>
-                            <th>No Surat </th>
                             <th>Action</th>
                         </tr>
                     </tfoot>

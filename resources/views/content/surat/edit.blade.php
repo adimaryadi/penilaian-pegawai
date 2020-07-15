@@ -23,6 +23,14 @@
               <label for="exampleInputPassword1">Tanggal Berakhir</label>
               <input type="date" class="form-control" name="tanggal_berakhir" value="{{ $edit->tanggal_berakhir }}" id="exampleInputPassword1" required>
             </div>
+            <div class="form-group">
+              <label for="">Tujuan Kota</label>
+              <input class="form-control" name="tujuan_kota" value="{{ $edit->tujuan_kota }}">
+            </div>
+            <div class="form-group">
+              <label for="">Tujuan Luar kota</label>
+              <input class="form-control" name="tujuan_luar_kota" value="{{ $edit->tujuan_luar_kota }}">
+            </div>
           </div>
           <!-- /.card-body -->
 

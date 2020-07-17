@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Pegawai</label>
                         <select class="form-control" name="id_pegawai" id="pilih_user" onchange="Pilih_pegawai()">
-                            <option value="{{ $data_edit->id_user }}">Tidak di ubah</option>
+                            <option value="{{ $data_edit->id_users }}">tidak ada perubahan</option>
                             @foreach($data_user as $list)
                                 <option value="{{ $list->id }}">{{ $list->name }}</option>
                             @endforeach

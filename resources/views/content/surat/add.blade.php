@@ -23,11 +23,11 @@
                   <input type="date" class="form-control" name="tanggal_berakhir" id="exampleInputPassword1" required>
                 </div>
                 <div class="form-group">
-                  <label for="">Tujuan Kota</label>
+                  <label for="">Kota</label>
                   <input class="form-control" name="tujuan_kota">
                 </div>
                 <div class="form-group">
-                  <label for="">Tujuan Luar kota</label>
+                  <label for="">Tujuan Dinas</label>
                   <input class="form-control" name="tujuan_luar_kota">
                 </div>
               </div>

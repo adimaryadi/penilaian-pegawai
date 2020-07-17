@@ -13,7 +13,7 @@
 						<div class="form-group">
 							<label>Pilih Surat</label>
 							<select class="form-control" name="no_surat">
-								@foreach($data_surat as $data)
+								@foreach($data_pilih as $data)
 									<option value="{{ $data->no_surat }}">{{ $data->no_surat }}</option>
 								@endforeach
 							</select>

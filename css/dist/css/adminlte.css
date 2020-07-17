@@ -14,7 +14,19 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
+.print_out {
+    margin-left: 10px;
+    border: 1px solid;
+    width: 100%;
+    height: 801px;
+    padding: 45px;
+    background-color: white;
+}
+.report th {
+    font-size: 0.9em;
+    width: auto;
+    padding: 2px;
+}
 :root {
     --blue: #007bff;
     --indigo: #6610f2;

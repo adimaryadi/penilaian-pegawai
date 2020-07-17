@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\ModelPegawai;
 use App\PenilaianModel;
 use App\SuratModel;
+use App\HistoryModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 class PenilaianController extends Controller
@@ -29,8 +30,24 @@ class PenilaianController extends Controller
 
     public function Pilih_surat() {
         // $data_surat          =      SuratModel::all();
-        $data_surat          =      DB::table('users')->where('no_surat', Auth::user()->no_surat)->get();
-        return view('content.Penilaian.pilih_surat',compact('data_surat'));
+        $data_surat          =      DB::table('pegawai_pilih_surat')->get();
+        $data_filter_user    =      [];
+        $dump                =      [];
+        $data_pilih          =      [];
+        foreach ($data_surat as $hasil) {
+            if ($hasil->id_users == Auth::user()->id) {
+                array_push($dump, $hasil);
+            } else {
+                array_push($data_filter_user, $hasil);
+            }
+        }
+        foreach ($data_filter_user as $hasil) {
+            if ($hasil->no_surat == Auth::user()->no_surat) {
+                array_push($data_pilih, $hasil);
+            } 
+        }
+        // return $data_pilih;
+        return view('content.Penilaian.pilih_surat',compact('data_pilih'));
     }
 
     public function Pilih_penilai_pegawai(Request $request) {
@@ -120,14 +137,20 @@ class PenilaianController extends Controller
         } else {
 
             $PenilaianPegawai                               =      new PenilaianModel();
-            $PenilaianPegawai->id_nip                       =      $request->id_pegawai;
+            $PenilaianPegawai->id_nip                       =      $request->id_nip;
             $PenilaianPegawai->nama                         =      $request->nama;
+            $PenilaianPegawai->id_pegawai                   =      $request->id_pegawai;
             $PenilaianPegawai->jabatan                      =      $request->jabatan;
             $PenilaianPegawai->kedisiplinan                 =      $request->kedisiplinan;
             $PenilaianPegawai->kerja_sama                   =      $request->kerja_sama;
             $PenilaianPegawai->kode_etik                    =      $request->kode_etik;
             $PenilaianPegawai->ketepatan_membuat_laporan    =      $request->ketepatan_waktu_laporan;
             $PenilaianPegawai->pembuatan_kka                =      $request->pembuatan_kka;
+            $PenilaianPegawai->dinilai                                =      Auth::user()->name;
+            $history                                        =      new HistoryModel();
+            $history->pegawai                               =      $request->nama;
+            $history->data_nilai                            =      json_encode($PenilaianPegawai);
+            $history->save();
             $PenilaianPegawai->save();
             if (Auth::user()->level == 'admin') {
                 return redirect('penilaian')->with('pesan','Penilaian tersimpan');
@@ -181,6 +204,12 @@ class PenilaianController extends Controller
         $update->kode_etik                  =         $request->kode_etik;
         $update->ketepatan_membuat_laporan  =         $request->ketepatan_waktu_laporan;
         $update->pembuatan_kka              =         $request->pembuatan_kka;
+        $update->dinilai                    =         Auth::user()->name;
+        $history                            =         new HistoryModel();
+        $history->pegawai                   =         $request->nama;
+        $history->data_nilai                =         json_encode($update);
+        // return $update;
+        $history->save();
         $update->update();
         return redirect('penilaian')->with('pesan','Penilaian update');
     }

@@ -149,7 +149,7 @@
             <ul class="nav nav-treeview">
               @if(Auth::user()->level == 'pegawai')
               <li class="nav-item">
-                <a href="{{ url('pilih_surat') }}" class="nav-link">
+                <a href="{{ url('pilih_surat_penilaian') }}" class="nav-link">
                   <i class="fas fa-list"></i>
                   <p> Penilaian</p>
                 </a>
@@ -157,7 +157,7 @@
               @endif
               @if(Auth::user()->level == 'admin')
               <li class="nav-item">
-                <a href="{{ url('hasil_penilaian') }}" class="nav-link">
+                <a href="{{ url('pilih_surat') }}" class="nav-link">
                   <i class="fas fa-list"></i>
                   <p> Hasil Penilaian </p>
                 </a>
@@ -274,6 +274,9 @@
             @yield('pilih_pegawai_surat')
             @yield('buat_surat_pegawai')
             @yield('edit_surat_pegawai')
+            @yield('pilih')
+            @yield('pilih_pegawai')
+            @yield('Report_penilaian')
         </div>
       </div><!-- /.container-fluid -->
     </section>

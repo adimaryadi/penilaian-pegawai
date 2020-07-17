@@ -1,4 +1,4 @@
-@extends('home')
+    @extends('home')
 @section('penilaian_pegawai')
     <div class="penilaian-pegawai" style="width: 100%;">
         <div class="card card-primary">
@@ -10,10 +10,11 @@
             <!-- form start -->
             <form role="form" action="{{ url('penilaian') }}" method="POST">
                 @csrf
+              <input type="hidden" name="id_pegawai" id="id_pegawai" value="">
               <div class="card-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">ID</label>
-                  <select name="id_pegawai" id="pegawai_pilih" class="form-control" required onchange="ChangData()">
+                  <select name="id_nip" id="pegawai_pilih" class="form-control" required onchange="ChangData()">
                       <option value="">Pilih Pegawai</option>
                       @foreach ($pegawai as $item)
                           <option value="{{ $item->id_nip }}">{{ $item->id_nip }}</option>
@@ -228,6 +229,7 @@
             } else {
                 $('#nama').val(find.name);
                 $('#jabatan').val(find.jabatan);
+                $('#id_pegawai').val(find.id);
             }
             console.log(find);
         }

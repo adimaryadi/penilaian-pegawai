@@ -28,8 +28,8 @@
                 <th>Surat</th>
                 <th>tanggal</th>
                 <th>Tanggal Berakhir</th>
-                <th>tujuan kota</th>
-                <th>Tujuan luar kota</th>
+                <th>kota</th>
+                <th>Tujuan</th>
                 <th>Action</th>
             </tr>
         </thead>

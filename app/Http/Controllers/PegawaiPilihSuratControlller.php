@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\PegawaiPilihSuratModel;
 use App\User;
 use App\SuratModel;
+use App\HistoryModel;
 class PegawaiPilihSuratControlller extends Controller
 {
     /**
@@ -62,6 +63,22 @@ class PegawaiPilihSuratControlller extends Controller
         $create_surat->email        =       $request->email;
         $create_surat->jabatan      =       $request->jabatan;
         $create_surat->no_surat     =       $request->no_surat;
+        $find_pegawai               =       User::find($request->id_pegawai);
+        $find_pegawai->no_surat     =       $request->no_surat;
+        $history                    =       new HistoryModel();
+        $find_no_surat              =       DB::table('no_surat')->where('no_surat',$request->no_surat)->first();
+        // echo $find_no_surat->no_surat;
+        $history                    =       new HistoryModel();
+        $history->no_surat          =       $find_no_surat->no_surat;
+        $history->tanggal_surat     =       $find_no_surat->tanggal;
+        $history->tujuan_kota       =       $find_no_surat->tujuan_luar_kota;
+        $history->tujuan_luar_kota  =       $find_no_surat->tujuan_luar_kota;
+        $history->tanggal_berakhir  =       $find_no_surat->tanggal_berakhir;
+        $history->pegawai           =       $request->nama;
+        $history->email             =       $request->email;
+        $history->save();
+        $find_pegawai->update();
+        // return $find_pegawai;
         $create_surat->save();
         return redirect('pilih_surat_pegawai')->with('pesan','Surat pegawai di buat ');
     }
@@ -118,6 +135,22 @@ class PegawaiPilihSuratControlller extends Controller
         $create_surat->email        =       $request->email;
         $create_surat->jabatan      =       $request->jabatan;
         $create_surat->no_surat     =       $request->no_surat;
+        $history                    =       new HistoryModel();
+        $find_no_surat              =       DB::table('no_surat')->where('no_surat',$request->no_surat)->first();
+        // echo $find_no_surat->no_surat;
+        $history                    =       new HistoryModel();
+        $history->no_surat          =       $find_no_surat->no_surat;
+        $history->tanggal_surat     =       $find_no_surat->tanggal;
+        $history->tujuan_kota       =       $find_no_surat->tujuan_luar_kota;
+        $history->tujuan_luar_kota  =       $find_no_surat->tujuan_luar_kota;
+        $history->tanggal_berakhir  =       $find_no_surat->tanggal_berakhir;
+        $history->pegawai           =       $request->nama;
+        $history->email             =       $request->email;
+        $find_pegawai               =       User::find($request->id_pegawai);
+        // return $request->id_pegawai;
+        $find_pegawai->no_surat     =       $request->no_surat;
+        $history->save();
+        $find_pegawai->update();
         $create_surat->update();
         return redirect('pilih_surat_pegawai')->with('pesan','Surat pegawai di perbaharui ');
     }

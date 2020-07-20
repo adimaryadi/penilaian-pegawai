@@ -5,7 +5,7 @@
             <h3>Pilih Surat</h3>
         </div>
         <div class="card-body">
-        	<form action="{{ url('pilih_pegawai') }}" method="POST">
+        	<form action="{{ url('Report_penilaian') }}" method="POST">
         		@csrf
 	        	<div class="row">
 	        		<div class="col-md-6">

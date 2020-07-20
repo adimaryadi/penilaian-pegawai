@@ -1,5 +1,4 @@
-@extends('home')
-@section('Report_penilaian')
+<?php $__env->startSection('Report_penilaian'); ?>
     <div class="print_out">
         <div class="judul">
             <h3>Hasil Penilaian</h3>
@@ -8,7 +7,7 @@
                 <table>
                     <tr class="report">
                             <th>Surat:</th>
-                            <th>{{ $no_surat }}</th>
+                            <th><?php echo e($no_surat); ?></th>
                     </tr>
                 </table>
                 <table id="example2" class="table table-bordered table-hover">
@@ -25,10 +24,10 @@
                         <th>Hasil Akhir</th>
                     </tr>
                     <?php $no  =  1; ?>
-                    @foreach($find_penilaian as $list)
+                    <?php $__currentLoopData = $find_penilaian; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
-                            <td>{{ $list->id_nip }}</td>
+                            <td><?php echo e($list->id_nip); ?></td>
                             <td>
                                 <?php
                                     $kedisiplinan       =        0;
@@ -140,7 +139,7 @@
                                     }
                                 ?>   
                             </td>
-                            <td>{{ $list->dinilai }}</td>
+                            <td><?php echo e($list->dinilai); ?></td>
                             <td>
                                 <?php 
                                     $hasil_akhir            =        $kedisiplinan + $kerja_sama + $kode_etik + $ketepatan_membuat_laporan + $pembuatan_kka;
@@ -159,10 +158,11 @@
                                 ?>
                             </td>
                         </tr>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </table>
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('home', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Drivers\xampp\htdocs\penilaian-pegawai\resources\views/content/HasilPenilaian/Report_penilaian.blade.php ENDPATH**/ ?>

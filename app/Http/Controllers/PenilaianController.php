@@ -88,7 +88,7 @@ class PenilaianController extends Controller
         if (Auth::user()->level == 'admin') {
             $pegawai           =      DB::table('users')->where('no_surat',$no_surat)->get();
         } else {
-            $cari_pegawai        =          DB::table('users')->where('no_surat',$no_surat)->get();
+            $cari_pegawai        =          DB::table('users')->where('id',$no_surat)->get();
             $pegawai           =          [];
             $dump                =          [];
             foreach ($cari_pegawai as $value) {
@@ -132,8 +132,8 @@ class PenilaianController extends Controller
 
     public function store(Request $request)
     {
-        if (DB::table('penilaian')->where('id_nip',$request->id_pegawai)->exists()) {
-            return redirect('pilih_surat')->with('pesan',$request->id_pegawai.' Sudah ada');
+        if (DB::table('penilaian')->where('id_pegawai',$request->id_pegawai)->exists()) {
+            return redirect('pilih_surat_penilaian')->with('pesan',$request->nama.' Sudah ada');
         } else {
 
             $PenilaianPegawai                               =      new PenilaianModel();
@@ -146,6 +146,7 @@ class PenilaianController extends Controller
             $PenilaianPegawai->kode_etik                    =      $request->kode_etik;
             $PenilaianPegawai->ketepatan_membuat_laporan    =      $request->ketepatan_waktu_laporan;
             $PenilaianPegawai->pembuatan_kka                =      $request->pembuatan_kka;
+            $PenilaianPegawai->no_surat                     =      $request->nomor_surat;
             $PenilaianPegawai->dinilai                                =      Auth::user()->name;
             $history                                        =      new HistoryModel();
             $history->pegawai                               =      $request->nama;
@@ -155,7 +156,7 @@ class PenilaianController extends Controller
             if (Auth::user()->level == 'admin') {
                 return redirect('penilaian')->with('pesan','Penilaian tersimpan');
             } else {
-                return redirect('pilih_surat')->with('pesan','Penilaian tersimpan');
+                return redirect('pilih_surat_penilaian')->with('pesan','Penilaian tersimpan');
             }
         }
 

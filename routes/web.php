@@ -32,4 +32,4 @@ Route::resource('pilih_surat_pegawai','PegawaiPilihSuratControlller');
 Route::resource('history','HistoryController');
 Route::get('pilih_surat','HasilPenilaianController@pilih_surat');
 Route::post('pilih_pegawai','HasilPenilaianController@pilih_pegawai');
-Route::get('Report_penilaian','HasilPenilaianController@Report_penilaian');
+Route::post('Report_penilaian','HasilPenilaianController@Report_penilaian');

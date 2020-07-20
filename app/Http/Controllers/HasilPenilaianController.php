@@ -23,7 +23,7 @@ class HasilPenilaianController extends Controller
     }
 
     public function Report_penilaian(Request $request) {
-        $find_penilaian         =       DB::table('penilaian')->where('id_pegawai', $request->id_pegawai)->get();
+        $find_penilaian         =       DB::table('penilaian')->where('no_surat', $request->no_surat)->get();
         $no_surat               =       $request->no_surat;
         return view('content.HasilPenilaian.Report_penilaian',compact('find_penilaian','no_surat'));
     }

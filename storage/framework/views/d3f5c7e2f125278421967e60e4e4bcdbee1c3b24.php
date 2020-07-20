@@ -7,28 +7,28 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('css/plugins/fontawesome-free/css/all.min.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('css/plugins/fontawesome-free/css/all.min.css')); ?>">
   <!-- Ionicons -->
   <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
   <!-- Tempusdominus Bbootstrap 4 -->
-  <link rel="stylesheet" href="{{ asset('css/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('css/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')); ?>">
   <!-- iCheck -->
-  <link rel="stylesheet" href="{{ asset('css/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('css/plugins/icheck-bootstrap/icheck-bootstrap.min.css')); ?>">
   <!-- JQVMap -->
-  <link rel="stylesheet" href="{{ asset('css/plugins/jqvmap/jqvmap.min.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('css/plugins/jqvmap/jqvmap.min.css')); ?>">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('css/dist/css/adminlte.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('css/dist/css/adminlte.css')); ?>">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="{{ asset('css/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('css/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')); ?>">
   <!-- Daterange picker -->
-  <link rel="stylesheet" href="{{ asset('css/plugins/daterangepicker/daterangepicker.css') }}">
+  <link rel="stylesheet" href="<?php echo e(asset('css/plugins/daterangepicker/daterangepicker.css')); ?>">
   <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('css/plugins/summernote/summernote-bs4.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
-  <script src="{{ asset('css/plugins/jquery/jquery.min.js') }}"></script>
+  <link rel="stylesheet" href="<?php echo e(asset('css/plugins/summernote/summernote-bs4.css')); ?>">
+  <link rel="stylesheet" href="<?php echo e(asset('css/plugins/datatables-bs4/css/dataTables.bootstrap4.css')); ?>">
+  <script src="<?php echo e(asset('css/plugins/jquery/jquery.min.js')); ?>"></script>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <script type="text/javascript" src="{{ asset('js/sweetalert.min.js') }}"></script>
+  <script type="text/javascript" src="<?php echo e(asset('js/sweetalert.min.js')); ?>"></script>
   <style>
     .logout {
       position: absolute;
@@ -69,7 +69,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="#" class="d-block"><?php echo e(Auth::user()->name); ?></a>
         </div>
       </div>
 
@@ -78,21 +78,21 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          @if(Auth::user()->level == 'admin')
+          <?php if(Auth::user()->level == 'admin'): ?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
                 Surat
                 <i class="fas fa-angle-left right"></i>
-                @if(!empty($jumlah_surat))
-                    <span class="badge badge-info right">{{ $jumlah_surat }}</span>
-                @endif
+                <?php if(!empty($jumlah_surat)): ?>
+                    <span class="badge badge-info right"><?php echo e($jumlah_surat); ?></span>
+                <?php endif; ?>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ url('surat') }}" class="nav-link">
+                <a href="<?php echo e(url('surat')); ?>" class="nav-link">
                   <i class="fas fa-mail-bulk"></i>
                   <p>Daftar Surat</p>
                 </a>
@@ -109,20 +109,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ url('pegawai') }}" class="nav-link">
+                <a href="<?php echo e(url('pegawai')); ?>" class="nav-link">
                   <i class="fas fa-list"></i>
                   <p> Daftar Pegawai</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('pilih_surat_pegawai') }}" class="nav-link">
+                <a href="<?php echo e(url('pilih_surat_pegawai')); ?>" class="nav-link">
                   <i class="fas fa-list"></i>
                   <p> Daftar Surat Pegawai</p>
                 </a>
               </li>
             </ul>
           </li>
-          @endif
+          <?php endif; ?>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-check"></i>
@@ -132,22 +132,22 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              @if(Auth::user()->level == 'pegawai')
+              <?php if(Auth::user()->level == 'pegawai'): ?>
               <li class="nav-item">
-                <a href="{{ url('pilih_surat_penilaian') }}" class="nav-link">
+                <a href="<?php echo e(url('pilih_surat_penilaian')); ?>" class="nav-link">
                   <i class="fas fa-list"></i>
                   <p> Penilaian</p>
                 </a>
               </li>
-              @endif
-              @if(Auth::user()->level == 'admin')
+              <?php endif; ?>
+              <?php if(Auth::user()->level == 'admin'): ?>
               <li class="nav-item">
-                <a href="{{ url('pilih_surat') }}" class="nav-link">
+                <a href="<?php echo e(url('pilih_surat')); ?>" class="nav-link">
                   <i class="fas fa-list"></i>
                   <p> Hasil Penilaian </p>
                 </a>
               </li>
-              @endif
+              <?php endif; ?>
             </ul>
           </li>
         </ul>
@@ -168,7 +168,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <!-- <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ url('surat') }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="<?php echo e(url('surat')); ?>">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
             </ol> -->
           </div><!-- /.col -->
@@ -182,7 +182,7 @@
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          @if(Auth::user()->level == 'admin')
+          <?php if(Auth::user()->level == 'admin'): ?>
           <div class="col-lg-3 col-6">
             <!-- small box -->
 <!--             <div class="small-box bg-info">
@@ -194,7 +194,7 @@
               <div class="icon">
                 <i class="fas fa-mail-bulk"></i>
               </div>
-              <a href="{{ url('surat') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?php echo e(url('surat')); ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div> -->
           </div>
           <div class="col-lg-3 col-6">
@@ -208,10 +208,10 @@
               <div class="icon">
                 <i class="fas fa-user-friends"></i>
               </div>
-              <a href="{{ url('pegawai') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?php echo e(url('pegawai')); ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div> -->
           </div>
-          @endif
+          <?php endif; ?>
 
 
           <div class="col-lg-3 col-6">
@@ -225,43 +225,44 @@
               <div class="icon">
                 <i class="fas fa-check"></i>
               </div>
-              <a href="{{ url('penilaian') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="<?php echo e(url('penilaian')); ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div> -->
           </div>
           <div class="col-lg-6">
-            @if(session('pesan'))
+            <?php if(session('pesan')): ?>
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h5><i class="icon fas fa-check"></i> Success!</h5>
-                {{ session('pesan') }}
+                <?php echo e(session('pesan')); ?>
+
             </div>
-            @endif
+            <?php endif; ?>
           </div>
         </div>
         <div class="row mb-2">
-            @yield('list_surat')
-            @yield('add_surat')
-            @yield('edit_surat')
-            @yield('list_pegawai')
-            @yield('tambah_karyawan')
-            @yield('edit_karyawan')
-            @yield('penilaian')
-            @yield('penilaian_pegawai')
-            @yield('edit_nilai')
-            @yield('filter_nomor')
-            @yield('hasil_penilaian')
-            @yield('view_penilaian')
-            @yield('report_nilai')
-            @yield('pilih_surat')
-            @yield('pilih_surat_pegawai')
-            @yield('hasil_keseluruhan')
-            @yield('report_nilai_admin')
-            @yield('pilih_pegawai_surat')
-            @yield('buat_surat_pegawai')
-            @yield('edit_surat_pegawai')
-            @yield('pilih')
-            @yield('pilih_pegawai')
-            @yield('Report_penilaian')
+            <?php echo $__env->yieldContent('list_surat'); ?>
+            <?php echo $__env->yieldContent('add_surat'); ?>
+            <?php echo $__env->yieldContent('edit_surat'); ?>
+            <?php echo $__env->yieldContent('list_pegawai'); ?>
+            <?php echo $__env->yieldContent('tambah_karyawan'); ?>
+            <?php echo $__env->yieldContent('edit_karyawan'); ?>
+            <?php echo $__env->yieldContent('penilaian'); ?>
+            <?php echo $__env->yieldContent('penilaian_pegawai'); ?>
+            <?php echo $__env->yieldContent('edit_nilai'); ?>
+            <?php echo $__env->yieldContent('filter_nomor'); ?>
+            <?php echo $__env->yieldContent('hasil_penilaian'); ?>
+            <?php echo $__env->yieldContent('view_penilaian'); ?>
+            <?php echo $__env->yieldContent('report_nilai'); ?>
+            <?php echo $__env->yieldContent('pilih_surat'); ?>
+            <?php echo $__env->yieldContent('pilih_surat_pegawai'); ?>
+            <?php echo $__env->yieldContent('hasil_keseluruhan'); ?>
+            <?php echo $__env->yieldContent('report_nilai_admin'); ?>
+            <?php echo $__env->yieldContent('pilih_pegawai_surat'); ?>
+            <?php echo $__env->yieldContent('buat_surat_pegawai'); ?>
+            <?php echo $__env->yieldContent('edit_surat_pegawai'); ?>
+            <?php echo $__env->yieldContent('pilih'); ?>
+            <?php echo $__env->yieldContent('pilih_pegawai'); ?>
+            <?php echo $__env->yieldContent('Report_penilaian'); ?>
         </div>
       </div><!-- /.container-fluid -->
     </section>
@@ -280,23 +281,23 @@
 <!-- jQuery -->
 
 <!-- jQuery UI 1.11.4 -->
-<script src="{{ asset('css/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+<script src="<?php echo e(asset('css/plugins/jquery-ui/jquery-ui.min.js')); ?>"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
-<script src="{{ asset('css/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="<?php echo e(asset('css/plugins/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
 <!-- ChartJS -->
-<!-- <script src="{{ asset('css/plugins/chart.js/Chart.min.js') }}"></script> -->
+<!-- <script src="<?php echo e(asset('css/plugins/chart.js/Chart.min.js')); ?>"></script> -->
 <!-- Sparkline -->
-<script src="{{ asset('css/plugins/sparklines/sparkline.js') }}"></script>
-<!-- <script src="{{ asset('css/plugins/jquery-knob/jquery.knob.min.js') }}"></script> -->
+<script src="<?php echo e(asset('css/plugins/sparklines/sparkline.js')); ?>"></script>
+<!-- <script src="<?php echo e(asset('css/plugins/jquery-knob/jquery.knob.min.js')); ?>"></script> -->
 <!-- daterangepicker -->
-<script src="{{ asset('css/plugins/moment/moment.min.js') }}"></script>
-<script src="{{ asset('css/plugins/daterangepicker/daterangepicker.js') }}"></script>
-<script src="{{ asset('css/plugins/datatables/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('css/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+<script src="<?php echo e(asset('css/plugins/moment/moment.min.js')); ?>"></script>
+<script src="<?php echo e(asset('css/plugins/daterangepicker/daterangepicker.js')); ?>"></script>
+<script src="<?php echo e(asset('css/plugins/datatables/jquery.dataTables.js')); ?>"></script>
+<script src="<?php echo e(asset('css/plugins/datatables-bs4/js/dataTables.bootstrap4.js')); ?>"></script>
 <script>
     $(function () {
       $("#example1").DataTable();
@@ -313,9 +314,9 @@
     function logout() {
       $.ajax({
         type: "POST",
-        url: "{{ url('logout') }}",
+        url: "<?php echo e(url('logout')); ?>",
         data: {
-           _token: '{{ csrf_token() }}'
+           _token: '<?php echo e(csrf_token()); ?>'
         },
         success: function (response) {
             swal({
@@ -323,23 +324,24 @@
               icon: 'success'
             });
             setTimeout(() => {
-              return window.location.href = '{{ url('login') }}';
+              return window.location.href = '<?php echo e(url('login')); ?>';
             }, 3000);
         }
       });
     }
   </script>
 <!-- Tempusdominus Bootstrap 4 -->
-<script src="{{ asset('css/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<script src="<?php echo e(asset('css/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')); ?>"></script>
 <!-- Summernote -->
-<script src="{{ asset('css/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src="<?php echo e(asset('css/plugins/summernote/summernote-bs4.min.js')); ?>"></script>
 <!-- overlayScrollbars -->
-<script src="{{ asset('css/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+<script src="<?php echo e(asset('css/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')); ?>"></script>
 <!-- AdminLTE App -->
-<script src="{{ asset('css/dist/js/adminlte.js') }}"></script>
+<script src="<?php echo e(asset('css/dist/js/adminlte.js')); ?>"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<!-- <script src="{{ asset('css/dist/js/pages/dashboard.js') }}"></script> -->
+<!-- <script src="<?php echo e(asset('css/dist/js/pages/dashboard.js')); ?>"></script> -->
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('css/dist/js/demo.js') }}"></script>
+<script src="<?php echo e(asset('css/dist/js/demo.js')); ?>"></script>
 </body>
 </html>
+<?php /**PATH C:\Drivers\xampp\htdocs\penilaian-pegawai\resources\views/home.blade.php ENDPATH**/ ?>

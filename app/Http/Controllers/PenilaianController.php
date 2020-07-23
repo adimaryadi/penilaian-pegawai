@@ -132,7 +132,7 @@ class PenilaianController extends Controller
 
     public function store(Request $request)
     {
-        if (DB::table('penilaian')->where('id_pegawai',$request->id_pegawai)->exists()) {
+        if (DB::table('penilaian')->where('id_nip', Auth::user()->id_nip)->exists()) {
             return redirect('pilih_surat_penilaian')->with('pesan',$request->nama.' Sudah ada');
         } else {
 

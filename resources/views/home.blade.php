@@ -25,7 +25,9 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('css/plugins/summernote/summernote-bs4.css') }}">
   <link rel="stylesheet" href="{{ asset('css/plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/print.min.css') }}">
   <script src="{{ asset('css/plugins/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/print.min.js') }}"></script>
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <script type="text/javascript" src="{{ asset('js/sweetalert.min.js') }}"></script>

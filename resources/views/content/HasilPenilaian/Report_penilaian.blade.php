@@ -1,6 +1,6 @@
 @extends('home')
 @section('Report_penilaian')
-    <div class="print_out">
+    <div class="print_out" id="print_now">
         <div class="judul">
             <h3>Hasil Penilaian</h3>
             <?php $no = 1; ?>
@@ -21,7 +21,7 @@
                         <th>Kerja Sama</th>
                         <th>Kode Etik</th>
                         <th>Ketepatan Membuat Laporan</th>
-                        <th>Pembuatan KKA</th>
+                        <th>Pembuatan KKP</th>
                         <th>Dinilai Oleh</th>
                         <th>Hasil Akhir</th>
                     </tr>
@@ -146,18 +146,18 @@
                             <td>
                                 <?php 
                                     $hasil_akhir            =        $kedisiplinan + $kerja_sama + $kode_etik + $ketepatan_membuat_laporan + $pembuatan_kka;
-                                    if ($hasil_akhir >= 89) {
+                                    if ($hasil_akhir >= 81) {
                                         echo "Sangat Baik";
                                     } else if ($hasil_akhir >= 76) {
                                         echo "Baik";
                                     } else if ($hasil_akhir >= 61) {
                                         echo "Cukup";
-                                    } else if ($hasil_akhir <= 59) {
+                                    } else if ($hasil_akhir >= 49) {
                                         echo "Kurang ";
-                                    } else if ($hasil_akhir <= 30) {
+                                    } else if ($hasil_akhir <= 20) {
                                         echo "Sangat Kurang";
                                     }
-                                    // echo $hasil_akhir;
+                                    // echo $hasil_akhir
                                 ?>
                             </td>
                         </tr>
@@ -166,5 +166,9 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div class="print-btn">
+        <button class="btn btn-primary" onclick="printJS('print_now', 'html')"><i class="fa fa-print" aria-hidden="true"></i></button>
+        <a href="{{ url('pdf?no_surat='.$no_surat) }}" class="btn btn-primary"><i class="fa fa fa-file" aria-hidden="true"></i></a>
     </div>
 @endsection

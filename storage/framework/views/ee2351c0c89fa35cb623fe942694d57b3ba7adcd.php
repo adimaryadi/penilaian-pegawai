@@ -1,5 +1,5 @@
 <?php $__env->startSection('Report_penilaian'); ?>
-    <div class="print_out">
+    <div class="print_out" id="print_now">
         <div class="judul">
             <h3>Hasil Penilaian</h3>
             <?php $no = 1; ?>
@@ -15,12 +15,13 @@
                     <tr>
                         <th>No</th>
                         <th>NIP</th>
+                        <th>Nama</th>
                         <th>Kedisiplinan</th>
                         <th>Kerja Sama</th>
                         <th>Kode Etik</th>
                         <th>Ketepatan Membuat Laporan</th>
-                        <th>Pembuatan KKA</th>
-                        <th>Ditilah Oleh</th>
+                        <th>Pembuatan KKP</th>
+                        <th>Dinilai Oleh</th>
                         <th>Hasil Akhir</th>
                     </tr>
                     <?php $no  =  1; ?>
@@ -28,13 +29,14 @@
                         <tr>
                             <td><?php echo $no++; ?></td>
                             <td><?php echo e($list->id_nip); ?></td>
+                            <td><?php echo e($list->nama); ?></td>
                             <td>
                                 <?php
                                     $kedisiplinan       =        0;
 
                                     if ($list->kedisiplinan == 'sangat_kurang') {
                                         $kedisiplinan   =        4;
-                                        echo "Sanggat Kurang";
+                                        echo "Sangat Kurang";
                                     }  else if($list->kedisiplinan == 'kurang') {
                                         $kedisiplinan   =        8;
                                         echo "Kurang";
@@ -46,7 +48,7 @@
                                         echo "baik";
                                     }  else if($list->kedisiplinan == 'sangat_baik') {
                                         $kedisiplinan   =        20;
-                                        echo "Sanggat Baik";
+                                        echo "Sangat Baik";
                                     }
 
                                 ?>
@@ -57,7 +59,7 @@
 
                                     if ($list->kerja_sama == 'sangat_kurang') {
                                         $kerja_sama   =        4;
-                                        echo "Sanggat Kurang";
+                                        echo "Sangat Kurang";
                                     }  else if($list->kerja_sama == 'kurang') {
                                         $kerja_sama   =        8;
                                         echo "Kurang";
@@ -69,7 +71,7 @@
                                         echo "baik";
                                     }  else if($list->kerja_sama == 'sangat_baik') {
                                         $kerja_sama   =        20;
-                                        echo "Sanggat Baik";
+                                        echo "Sangat Baik";
                                     }
                                 ?>   
                             </td>
@@ -79,7 +81,7 @@
 
                                     if ($list->kode_etik == 'sangat_kurang') {
                                         $kode_etik   =        4;
-                                        echo "Sanggat Kurang";
+                                        echo "Sangat Kurang";
                                     }  else if($list->kode_etik == 'kurang') {
                                         $kode_etik   =        8;
                                         echo "Kurang";
@@ -91,7 +93,7 @@
                                         echo "baik";
                                     }  else if($list->kode_etik == 'sangat_baik') {
                                         $kode_etik   =        20;
-                                        echo "Sanggat Baik";
+                                        echo "Sangat Baik";
                                     }
                                 ?>   
                             </td>
@@ -101,7 +103,7 @@
 
                                     if ($list->ketepatan_membuat_laporan == 'sangat_kurang') {
                                         $ketepatan_membuat_laporan   =        4;
-                                        echo "Sanggat Kurang";
+                                        echo "Sangat Kurang";
                                     }  else if($list->ketepatan_membuat_laporan == 'kurang') {
                                         $ketepatan_membuat_laporan   =        8;
                                         echo "Kurang";
@@ -113,7 +115,7 @@
                                         echo "baik";
                                     }  else if($list->ketepatan_membuat_laporan == 'sangat_baik') {
                                         $ketepatan_membuat_laporan   =        20;
-                                        echo "Sanggat Baik";
+                                        echo "Sangat Baik";
                                     }
                                 ?>   
                             </td>
@@ -123,7 +125,7 @@
 
                                     if ($list->pembuatan_kka == 'sangat_kurang') {
                                         $pembuatan_kka   =        4;
-                                        echo "Sanggat Kurang";
+                                        echo "Sangat Kurang";
                                     }  else if($list->pembuatan_kka == 'kurang') {
                                         $pembuatan_kka   =        8;
                                         echo "Kurang";
@@ -135,7 +137,7 @@
                                         echo "baik";
                                     }  else if($list->pembuatan_kka == 'sangat_baik') {
                                         $pembuatan_kka   =        20;
-                                        echo "Sanggat Baik";
+                                        echo "Sangat Baik";
                                     }
                                 ?>   
                             </td>
@@ -143,18 +145,18 @@
                             <td>
                                 <?php 
                                     $hasil_akhir            =        $kedisiplinan + $kerja_sama + $kode_etik + $ketepatan_membuat_laporan + $pembuatan_kka;
-                                    if ($hasil_akhir >= 89) {
-                                        echo "Sanggat Baik";
+                                    if ($hasil_akhir >= 81) {
+                                        echo "Sangat Baik";
                                     } else if ($hasil_akhir >= 76) {
                                         echo "Baik";
                                     } else if ($hasil_akhir >= 61) {
                                         echo "Cukup";
-                                    } else if ($hasil_akhir <= 59) {
+                                    } else if ($hasil_akhir >= 49) {
                                         echo "Kurang ";
-                                    } else {
-                                        echo "Sanggat Kurang";
+                                    } else if ($hasil_akhir <= 20) {
+                                        echo "Sangat Kurang";
                                     }
-                                    // echo $hasil_akhir;
+                                    // echo $hasil_akhir
                                 ?>
                             </td>
                         </tr>
@@ -163,6 +165,10 @@
                 </table>
             </div>
         </div>
+    </div>
+    <div class="print-btn">
+        <button class="btn btn-primary" onclick="printJS('print_now', 'html')"><i class="fa fa-print" aria-hidden="true"></i></button>
+        <a href="<?php echo e(url('pdf?no_surat='.$no_surat)); ?>" class="btn btn-primary"><i class="fa fa fa-file" aria-hidden="true"></i></a>
     </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('home', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Drivers\xampp\htdocs\penilaian-pegawai\resources\views/content/HasilPenilaian/Report_penilaian.blade.php ENDPATH**/ ?>

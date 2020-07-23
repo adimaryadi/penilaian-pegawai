@@ -33,3 +33,4 @@ Route::resource('history','HistoryController');
 Route::get('pilih_surat','HasilPenilaianController@pilih_surat');
 Route::post('pilih_pegawai','HasilPenilaianController@pilih_pegawai');
 Route::post('Report_penilaian','HasilPenilaianController@Report_penilaian');
+Route::get('pdf','HasilPenilaianController@Report_pdf');

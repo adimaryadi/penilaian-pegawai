@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\SuratModel;
 use Illuminate\Support\Facades\DB;
+use PDF;
 class HasilPenilaianController extends Controller
 {
     //
@@ -26,5 +27,15 @@ class HasilPenilaianController extends Controller
         $find_penilaian         =       DB::table('penilaian')->where('no_surat', $request->no_surat)->get();
         $no_surat               =       $request->no_surat;
         return view('content.HasilPenilaian.Report_penilaian',compact('find_penilaian','no_surat'));
+    }
+
+    public function Report_pdf(Request $request) {
+        $no_surat                    =           $request->no_surat;
+        $data                        =           DB::table('penilaian')->where('no_surat', $no_surat)->get();
+        $pdf = PDF::loadView('content.HasilPenilaian.cetak_pdf',compact('data','no_surat'));
+        
+        return $pdf->download('Report.pdf');
+        
+        return view('content.HasilPenilaian.cetak_pdf',compact('data','no_surat'));
     }
 }

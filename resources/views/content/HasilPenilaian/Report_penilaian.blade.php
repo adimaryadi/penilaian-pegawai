@@ -146,13 +146,13 @@
                             <td>
                                 <?php 
                                     $hasil_akhir            =        $kedisiplinan + $kerja_sama + $kode_etik + $ketepatan_membuat_laporan + $pembuatan_kka;
-                                    if ($hasil_akhir >= 81) {
+                                    if ($hasil_akhir >= 90) {
                                         echo "Sangat Baik";
-                                    } else if ($hasil_akhir >= 76) {
+                                    } else if ($hasil_akhir >= 80) {
                                         echo "Baik";
-                                    } else if ($hasil_akhir >= 61) {
+                                    } else if ($hasil_akhir >= 60) {
                                         echo "Cukup";
-                                    } else if ($hasil_akhir >= 49) {
+                                    } else if ($hasil_akhir >= 40) {
                                         echo "Kurang ";
                                     } else if ($hasil_akhir <= 20) {
                                         echo "Sangat Kurang";

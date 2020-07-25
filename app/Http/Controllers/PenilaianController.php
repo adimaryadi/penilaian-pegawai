@@ -101,7 +101,9 @@ class PenilaianController extends Controller
         }
         // return $cari_data;
         $pegawai_json       =     json_encode($pegawai);
-        return view('content.Penilaian.nilai',compact('pegawai','pegawai_json'));
+        $cek                =     Auth::user()->id.'-'.$pegawai[0]->name.'-'.$pegawai[0]->no_surat;
+        $hasil_cek          =     DB::table('penilaian')->where('banyak_ke_satu',$cek)->exists();
+        return view('content.Penilaian.nilai',compact('pegawai','pegawai_json','hasil_cek'));
     }
 
     public function ReportNilai(Request $request) {
@@ -132,7 +134,8 @@ class PenilaianController extends Controller
 
     public function store(Request $request)
     {
-        if (DB::table('penilaian')->where('id_nip', Auth::user()->id_nip)->exists()) {
+        $cek                =            Auth::user()->id.'-'.$request->nama.'-'.$request->nomor_surat;
+        if (DB::table('penilaian')->where('banyak_ke_satu', $cek)->exists()) {
             return redirect('pilih_surat_penilaian')->with('pesan',$request->nama.' Sudah ada');
         } else {
 
@@ -147,6 +150,7 @@ class PenilaianController extends Controller
             $PenilaianPegawai->ketepatan_membuat_laporan    =      $request->ketepatan_waktu_laporan;
             $PenilaianPegawai->pembuatan_kka                =      $request->pembuatan_kka;
             $PenilaianPegawai->no_surat                     =      $request->nomor_surat;
+            $PenilaianPegawai->banyak_ke_satu               =      $cek;
             $PenilaianPegawai->dinilai                                =      Auth::user()->name;
             $history                                        =      new HistoryModel();
             $history->pegawai                               =      $request->nama;

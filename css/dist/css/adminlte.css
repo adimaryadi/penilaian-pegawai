@@ -24,6 +24,10 @@
     background-color: white;
 }
 
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: inherit !important;
+}
+
 .report th {
     font-size: 0.9em;
     width: auto;

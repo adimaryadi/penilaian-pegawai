@@ -1,12 +1,11 @@
-@extends('home')
-@section('penilaian_pegawai')
-    @if($hasil_cek == 1)
+<?php $__env->startSection('penilaian_pegawai'); ?>
+    <?php if($hasil_cek == 1): ?>
         <div class="alert alert-default-info alert-dismissible" style="width: 100%;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h5><i class="icon fas fa-question"></i> Info!</h5>
-                {{ $pegawai[0]->name }} Sudah Dinilai
+                <?php echo e($pegawai[0]->name); ?> Sudah Dinilai
         </div>
-    @else
+    <?php else: ?>
     <div class="penilaian-pegawai" style="width: 100%;">
         <div class="card card-primary">
             <div class="card-header">
@@ -15,17 +14,17 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="{{ url('penilaian') }}" method="POST">
-                @csrf
+            <form role="form" action="<?php echo e(url('penilaian')); ?>" method="POST">
+                <?php echo csrf_field(); ?>
               <input type="hidden" name="id_pegawai" id="id_pegawai" value="">
               <div class="card-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">ID</label>
                   <select name="id_nip" id="pegawai_pilih" class="form-control" required onchange="ChangData()">
                       <option value="">Pilih Pegawai</option>
-                      @foreach ($pegawai as $item)
-                          <option value="{{ $item->id_nip }}">{{ $item->id_nip }}</option>
-                      @endforeach
+                      <?php $__currentLoopData = $pegawai; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                          <option value="<?php echo e($item->id_nip); ?>"><?php echo e($item->id_nip); ?></option>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </select>
                 </div>
                 <input type="hidden" name="nomor_surat" id="nomor_surat">
@@ -221,7 +220,7 @@
             </form>
           </div>
     </div>
-    @endif
+    <?php endif; ?>
     <script type="text/javascript">
         function ChangData() {
             let pilih       =       $('#pegawai_pilih').val();
@@ -243,4 +242,5 @@
             console.log(find);
         }
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('home', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Drivers\xampp\htdocs\penilaian-pegawai\resources\views/content/Penilaian/nilai.blade.php ENDPATH**/ ?>

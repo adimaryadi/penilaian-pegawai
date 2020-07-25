@@ -26,6 +26,7 @@ class PenilaianPegawai extends Migration
             $table->string('dinilai')->nullable();
             $table->enum('pembuatan_kka',['sangat_kurang','kurang','cukup','baik','sangat_baik'])->nullable();
             $table->string('no_surat');
+            $table->string('banyak_ke_satu')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('created_at')->nullable();
         });

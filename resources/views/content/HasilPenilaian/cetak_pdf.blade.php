@@ -6,6 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
+        <style>
+            .print_out {
+                padding-left: 16px !important;
+                width: 100%;
+                height: 801px;
+                padding: 45px;
+                background-color: white;
+            }
+            .table-bordered th, .table-bordered td {
+                font-size: 0.9em;
+                border: 1px solid #dee2e6;
+                padding: 5px;
+            }
+            .table th, .table td {
+                padding: 3px !important; 
+                vertical-align: top;
+                border-top: 1px solid #dee2e6;
+            }
+        </style>
+        <link rel="stylesheet" href="{{ asset('css/dist/css/adminlte.css') }}">
         <div class="print_out" id="print_now">
                 <div class="judul">
                     <h3>Hasil Penilaian</h3>
@@ -26,7 +46,7 @@
                                 <th>Kedisiplinan</th>
                                 <th>Kerja Sama</th>
                                 <th>Kode Etik</th>
-                                <th>Ketepatan Membuat Laporan</th>
+                                <th>KPL</th>
                                 <th>Pembuatan KKP</th>
                                 <th>Dinilai Oleh</th>
                                 <th>Hasil Akhir</th>

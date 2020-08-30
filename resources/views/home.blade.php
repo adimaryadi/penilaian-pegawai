@@ -239,6 +239,15 @@
             </div>
             @endif
           </div>
+          <div class="col-lg-6">
+            @if(session('error'))
+            <div class="alert alert-error alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Error!</h5>
+                {{ session('error') }}
+            </div>
+            @endif
+          </div>
         </div>
         <div class="row mb-2">
             @yield('list_surat')

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\SuratModel;
 use App\ModelPegawai;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 class PegawaiController extends Controller
 {
     /**
@@ -50,8 +51,24 @@ class PegawaiController extends Controller
         $pegawai->password      =       Hash::make($request->password);
         // $pegawai->no_surat      =       $request->no_surat;
         $pegawai->level         =       $request->level;
-        $pegawai->save();
-        return redirect('pegawai')->with('pesan','Pegawai Tersimpan');
+        
+        if ($request->dinas == 'sedang_dinas') {
+            if ($request->no_surat == "") {
+                return redirect('pegawai/create')->with('error','No Surat Kosong ');
+            } else {
+                $find_surat                     =        DB::table('no_surat')->where('no_surat', $request->no_surat)->first();
+                $pegawai->no_surat              =        $request->no_surat;
+                $pegawai->dari_tanggal_dinas    =        $find_surat->tanggal;
+                $pegawai->sampai_tanggal_dinas  =        $find_surat->tanggal_berakhir;
+                $pegawai->status_dinas          =        $request->dinas;
+                $pegawai->save();
+                return redirect('pegawai')->with('pesan','Pegawai Tersimpan');
+            }
+        } else {
+            $pegawai->save();
+            return redirect('pegawai')->with('pesan','Pegawai Tersimpan');
+        }
+        
     }
 
     /**
@@ -97,6 +114,23 @@ class PegawaiController extends Controller
         }
         // $updated->no_surat  =    $request->no_surat;
         $updated->level     =    $request->level;
+        if ($request->dinas == 'sedang_dinas') {
+            if ($request->no_surat == "") {
+                return redirect('pegawai/'.$id.'/edit')->with('error',$request->nama. ' No surat kosong');
+            } else {
+                $find_surat                     =        DB::table('no_surat')->where('no_surat', $request->no_surat)->first();
+                $updated->no_surat              =        $request->no_surat;
+                $updated->dari_tanggal_dinas    =        $find_surat->tanggal;
+                $updated->sampai_tanggal_dinas  =        $find_surat->tanggal_berakhir;
+                $updated->status_dinas          =        $request->dinas;
+            }
+        } else if ($request->dinas == 'tidak_dinas') {
+            $find_surat                     =        DB::table('no_surat')->where('no_surat', $request->no_surat)->first();
+            $updated->no_surat              =        "";
+            $updated->dari_tanggal_dinas    =        null;
+            $updated->sampai_tanggal_dinas  =        null;
+            $updated->status_dinas          =        $request->dinas;
+        }
         $updated->update();
         return redirect('pegawai')->with('pesan',$request->nama. ' Diperbaharui');
     }

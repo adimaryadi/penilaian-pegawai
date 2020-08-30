@@ -240,6 +240,16 @@
             </div>
             <?php endif; ?>
           </div>
+          <div class="col-lg-6">
+            <?php if(session('error')): ?>
+            <div class="alert alert-error alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h5><i class="icon fas fa-check"></i> Error!</h5>
+                <?php echo e(session('error')); ?>
+
+            </div>
+            <?php endif; ?>
+          </div>
         </div>
         <div class="row mb-2">
             <?php echo $__env->yieldContent('list_surat'); ?>

@@ -76,6 +76,14 @@ class PegawaiPilihSuratControlller extends Controller
         $history->tanggal_berakhir  =       $find_no_surat->tanggal_berakhir;
         $history->pegawai           =       $request->nama;
         $history->email             =       $request->email;
+        $datenow                    =       Date('Y-m-d');
+        $data_user                  =       DB::table('users')->where('id', $request->id_pegawai)->first();
+        if ($data_user->status_dinas == 'sedang_dinas') {
+            if ($datenow >= $data_user->dari_tanggal_dinas && $datenow <= $data_user->sampai_tanggal_dinas) {
+                return redirect('pilih_surat_pegawai/create')->with('error','Pegawai '.$request->nama. ' Sedang menjalankan dinas tidak bisa disimpan');
+            }
+        }
+        // return $data_user->dari_tanggal_dinas;
         $history->save();
         $find_pegawai->update();
         // return $find_pegawai;
@@ -146,6 +154,13 @@ class PegawaiPilihSuratControlller extends Controller
         $history->tanggal_berakhir  =       $find_no_surat->tanggal_berakhir;
         $history->pegawai           =       $request->nama;
         $history->email             =       $request->email;
+        $datenow                    =       Date('Y-m-d');
+        $data_user                  =       DB::table('users')->where('id', $request->id_pegawai)->first();
+        if ($data_user->status_dinas == 'sedang_dinas') {
+            if ($datenow >= $data_user->dari_tanggal_dinas && $datenow <= $data_user->sampai_tanggal_dinas) {
+                return redirect('pilih_surat_pegawai/create')->with('error','Pegawai '.$request->nama. ' Sedang menjalankan dinas tidak bisa disimpan');
+            }
+        }
         $find_pegawai               =       User::find($request->id_pegawai);
         // return $request->id_pegawai;
         $find_pegawai->no_surat     =       $request->no_surat;

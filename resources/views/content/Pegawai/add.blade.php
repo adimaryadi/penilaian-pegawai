@@ -43,6 +43,28 @@
                     <option value="pegawai">Pegawai</option>
                 </select>
             </div>
+            <div class="form-group" id="no_surat" style="display: none">
+              <label for="exampleInputEmail1">No Surat</label>
+              <select class="form-control" name="no_surat" >
+                  <option value="">Pilih Surat</option>
+                  @if(!empty($surat))
+                    @foreach($surat as $list)
+                        <option value="{{ $list->no_surat }}">{{ $list->no_surat }}</option>
+                    @endforeach
+                  @endif
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="">Status Dinas</label>
+            </div>
+            <div class="form-group">
+               <input type="radio" name="dinas" class="radio" value="sedang_dinas" onclick="Dinas('sedang_dinas')">
+               <label for="">Sedang Dinas</label>
+            </div>
+            <div class="form-group">
+               <input type="radio" name="dinas" class="radio" value="tidak_dinas" checked onclick="Dinas('tidak_dinas')">
+               <label for="">Tidak Sedang Dinas</label>
+            </div>
           </div>
           <!-- /.card-body -->
 
@@ -51,5 +73,16 @@
           </div>
         </form>
       </div>
-</div>   
+</div> 
+
+<script>
+   function Dinas(status) {
+      if (status == 'sedang_dinas') {
+         $('#no_surat').css('display','block');
+      }
+      if (status == 'tidak_dinas') {
+         $('#no_surat').css('display','none');
+      }
+   }
+</script>
 @endsection

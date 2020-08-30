@@ -15,6 +15,12 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+.form-group .radio {
+    position: relative;
+    margin-right: 13px;
+    top: 1px;
+}
+
 .print_out {
     margin-left: 10px;
     /* border: 1px solid; */

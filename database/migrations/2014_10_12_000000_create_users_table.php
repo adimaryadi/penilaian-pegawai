@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('no_surat')->nullable();
             $table->enum('level',['admin','pegawai']);
+            $table->enum('status_dinas',['sedang_dinas','tidak_dinas'])->nullable();
+            $table->date('dari_tanggal_dinas')->nullable();
+            $table->date('sampai_tanggal_dinas')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
